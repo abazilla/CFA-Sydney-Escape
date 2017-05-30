@@ -19,7 +19,7 @@ const { connection: db } = mongoose;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-  console.log('connected to se database')
+  console.log('connected to SE database')
 });
 
 // view engine setup

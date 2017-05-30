@@ -8,12 +8,9 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
-    <form class="" action="/" method="post">
+    <form class="" action="/stats" method="post">
       Date
-      <input type="text" name="stat_date">
-      <br>
-      email
-      <input type="text" name="stat_email">
+      <input type="date" name="stat_date">
       <br>
       time
       <input type="text" name="stat_time">
@@ -31,7 +28,6 @@
       <% stats.forEach(stat => { %>
         <li><%= stat._id %></li>
         <li><%= stat.date %></li>
-        <li><%= stat.email %></li>
         <li><%= stat.time %></li>
         <li><%= stat.picture %></li>
         <li><%= stat.team %></li>
