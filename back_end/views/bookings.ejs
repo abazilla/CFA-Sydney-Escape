@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <form class="" action="/" method="post">
+      Full Name
+      <input type="text" name="booking_name">
+      <br>
+      email
+      <input type="text" name="booking_email">
+      <br>
+      Date
+      <input type="date" name="booking_date">
+      <br>
+      notes
+      <textarea rows="5" cols="80" name="booking_notes"></textarea>
+      <br>
+      has_paid
+      <input type="checkbox" name="booking_has_paid">
+      <br>
+      <input type="submit">
+    </form>
+
+    <ul>
+      <% bookings.forEach(booking => { %>
+        <li><%= booking._id %></li>
+        <li><%= booking.name %></li>
+        <li><%= booking.email %></li>
+        <li><%= booking.date %></li>
+        <li><%= booking.notes %></li>
+        <li><%= booking.has_paid %></li>
+        <br>
+      <% }) %>
+    </ul>
+  </body>
+</html>

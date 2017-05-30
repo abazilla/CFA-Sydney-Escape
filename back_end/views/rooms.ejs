@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <form class="" action="/" method="post">
+      Title
+      <input type="text" name="room_name">
+      <br>
+      is enabled
+      <input type="checkbox" name="room_is_enabled" unchecked>
+      <br>
+      description
+      <textarea rows="5" cols="80" name="room_description"></textarea>
+      <br>
+      pix
+      <input type="text" name="room_pictures">
+      <br>
+      <input type="submit">
+    </form>
+
+    <ul>
+      <% rooms.forEach(room => { %>
+        <li><%= room._id %></li>
+        <li><%= room.is_enabled %></li>
+        <li><%= room.name %></li>
+        <li><%= room.description %></li>
+        <li><%= room.pictures %></li>
+        <br>
+      <% }) %>
+    </ul>
+  </body>
+</html>
