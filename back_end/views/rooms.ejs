@@ -10,27 +10,41 @@
 
     <form class="" action="/rooms" method="post">
       Title
-      <input type="text" name="room_name">
       <br>
-      is enabled
-      <input type="checkbox" name="room_is_enabled" unchecked>
+      <input type="text" name="title">
+      <br>
+      Min Members
+      <br>
+      <input type="text" name="minMembers">
+      <br>
+      Max Members
+      <br>
+      <input type="text" name="maxMembers">
+      <br>
+      isEnabled
+      <br>
+      <input type="checkbox" name="isEnabled" unchecked>
       <br>
       description
-      <textarea rows="5" cols="80" name="room_description"></textarea>
       <br>
-      pix
-      <input type="text" name="room_pictures">
+      <textarea rows="5" cols="80" name="description"></textarea>
+      <br>
+      pictures
+      <br>
+      <input type="text" name="pictures">
       <br>
       <input type="submit">
     </form>
 
     <ul>
       <% rooms.forEach(room => { %>
-        <li><%= room._id %></li>
-        <li><%= room.is_enabled %></li>
-        <li><%= room.name %></li>
-        <li><%= room.description %></li>
-        <li><%= room.pictures %></li>
+        <li>Room ID: <%= room._id %></li>
+        <li>Title: <%= room.title %></li>
+        <li>Created: <%= room.createdAt %></li>
+        <li>Enabled? <%= room.isEnabled %></li>
+        <li>From: <%= room.minMembers %> to <%= room.maxMembers %></li>
+        <li>Description: <%= room.description %></li>
+        <li>Pictures: <%= room.pictures %></li>
         <br>
       <% }) %>
     </ul>

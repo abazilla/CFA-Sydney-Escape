@@ -1,17 +1,29 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const ObjectId = require('mongoose').Schema.ObjectId
 
 //TODO - Add stats and booking reference to schema
 const roomSchema = new Schema({
-  name: {
+  bookings: [
+    {
+      bookingId: ObjectId
+    }
+  ],
+  title: {
     type: String,
     trim: true
   },
-  created_at: {
+  createdAt: {
     type: Date,
     default: Date.now
   },
-  is_enabled: {
+  minMembers: {
+    type: Number
+  },
+  maxMembers: {
+    type: Number
+  },
+  isEnabled: {
     type: Boolean,
     default: false
   },
@@ -22,7 +34,7 @@ const roomSchema = new Schema({
   pictures: {
     type: String,
     trim: true
-  }
+  },
 })
 
 const Room = mongoose.model('Room', roomSchema);

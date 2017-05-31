@@ -9,32 +9,43 @@
     <p>Welcome to <%= title %></p>
 
     <form class="" action="/bookings" method="post">
-      Full Name
-      <input type="text" name="booking_name">
+      Your Name
       <br>
-      email
-      <input type="text" name="booking_email">
+      <input type="text" name="organiserName">
+      <br>
+      Your Email
+      <br>
+      <input type="text" name="organiserEmail">
       <br>
       Date
-      <input type="date" name="booking_date">
       <br>
-      notes
-      <textarea rows="5" cols="80" name="booking_notes"></textarea>
+      <input type="date" name="date">
       <br>
-      has_paid
-      <input type="checkbox" name="booking_has_paid">
+      Notes
       <br>
+      <textarea rows="5" cols="80" name="notes"></textarea>
+      <br>
+      hasPaid
+      <br>
+      <input type="checkbox" name="hasPaid">
+      <br>
+      Team Name
+      <br>
+      <input type="text" name="teamName">
+      <br>
+
       <input type="submit">
     </form>
 
     <ul>
       <% bookings.forEach(booking => { %>
-        <li><%= booking._id %></li>
-        <li><%= booking.name %></li>
-        <li><%= booking.email %></li>
-        <li><%= booking.date %></li>
-        <li><%= booking.notes %></li>
-        <li><%= booking.has_paid %></li>
+        <li>Booking ID: <%= booking._id %></li>
+        <li>Organiser Name: <%= booking.organiserName %></li>
+        <li>Organiser Email: <%= booking.organiserEmail %></li>
+        <li>Team Name: <%= booking.teamName %></li>
+        <li>Date: %= booking.date %></li>
+        <li>Notes: <%= booking.notes %></li>
+        <li>hasPaid: <%= booking.hasPaid %></li>
         <br>
       <% }) %>
     </ul>

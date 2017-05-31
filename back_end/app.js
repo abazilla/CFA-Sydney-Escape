@@ -37,7 +37,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/bookings', index);
 app.use('/rooms', index);
-app.use('/stats', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

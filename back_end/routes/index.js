@@ -3,11 +3,12 @@ var router = express.Router();
 
 const Room = require('../models/Room');
 const Booking = require('../models/Booking');
-const Stat = require('../models/Stat');
 
 
 router.get('/', function(req, res, next) {
-      res.render('index')
+      res.render('index', {
+        title: 'index'
+      })
 });
 
 router.get('/rooms/', function(req, res, next) {
@@ -21,14 +22,19 @@ router.get('/rooms/', function(req, res, next) {
 });
 
 router.post('/rooms/', (req, res) => {
-  const name = req.body.room_name;
-  const is_enabled = req.body.room_is_enabled;
-  const description = req.body.room_description;
-  const pictures = req.body.room_pictures;
+  const title = req.body.title;
+  const minMembers = req.body.minMembers;
+  const maxMembers = req.body.maxMembers;
+  const isEnabled = req.body.isEnabled;
+  const description = req.body.description;
+  const pictures = req.body.pictures;
 
   let room = new Room();
-  room.name = name;
-  room.is_enabled = is_enabled;
+  //room.bookings = req...
+  room.title = title;
+  room.minMembers = minMembers;
+  room.maxMembers = maxMembers;
+  room.isEnabled = isEnabled;
   room.description = description;
   room.pictures = pictures;
 
@@ -50,53 +56,29 @@ router.get('/bookings/', function(req, res, next) {
 });
 
 router.post('/bookings/', (req, res) => {
-  const name = req.body.booking_name;
-  const email = req.body.booking_email;
-  const date = req.body.booking_date;
-  const notes = req.body.booking_notes;
-  const has_paid = req.body.booking_has_paid;
+  const organiserName = req.body.organiserName;
+  const organiserEmail = req.body.organiserEmail;
+  const date = req.body.date;
+  const notes = req.body.notes;
+  const hasPaid = req.body.hasPaid;
+  const teamName = req.body.teamName;
+  // const teamMembers = req.body.teamMembers;
+  // const stats = req.body.stats;
 
   let booking = new Booking();
-  booking.name = name;
-  booking.email = email;
+  //booking.roomId = req...
+  booking.organiserName = organiserName;
+  booking.organiserEmail = organiserEmail;
   booking.date = date;
   booking.notes = notes;
-  booking.has_paid = has_paid;
+  booking.hasPaid = hasPaid;
+  booking.teamName = teamName;
+  // booking.teamMembers = teamMembers;
+  // booking.stats = stats;
 
   booking.save()
     .then(() => {
       res.redirect('/bookings/')
-    })
-
-});
-
-router.get('/stats/', function(req, res, next) {
-  Stat.find()
-    .then(stats => {
-      res.render('stats', {
-        title: 'Stats',
-        stats: stats
-      })
-    })
-});
-
-router.post('/stats/', (req, res) => {
-  const date = req.body.stat_date;
-  const email = req.body.stat_email;
-  const time = req.body.stat_time;
-  const picture = req.body.stat_picture;
-  const team = req.body.stat_team;
-
-  let stat = new Stat();
-  stat.date = date;
-  stat.email = email;
-  stat.time = time;
-  stat.picture = picture;
-  stat.team = team;
-
-  stat.save()
-    .then(() => {
-      res.redirect('/stats/')
     })
 
 });
