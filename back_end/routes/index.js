@@ -4,13 +4,14 @@ var router = express.Router();
 const Room = require('../models/Room');
 const Booking = require('../models/Booking');
 
-
+//root GET
 router.get('/', function(req, res, next) {
       res.render('index', {
         title: 'index'
       })
 });
 
+//Rooms GET
 router.get('/rooms/', function(req, res, next) {
   Room.find()
     .then(rooms => {
@@ -21,6 +22,15 @@ router.get('/rooms/', function(req, res, next) {
     })
 });
 
+//Rooms GET JSON
+router.get('/api/rooms/', function(req, res, next) {
+  Room.find()
+    .then(rooms => {
+        res.json(rooms)
+      })
+});
+
+//Rooms POST
 router.post('/rooms/', (req, res) => {
   const title = req.body.title;
   const minMembers = req.body.minMembers;
@@ -45,6 +55,32 @@ router.post('/rooms/', (req, res) => {
 
 });
 
+//Rooms POST JSON
+router.post('/api/rooms/new/', (req, res) => {
+  const title = req.query.title;
+  const minMembers = req.query.minMembers;
+  const maxMembers = req.query.maxMembers;
+  const isEnabled = req.query.isEnabled;
+  const description = req.query.description;
+  const pictures = req.query.pictures;
+
+  let room = new Room();
+  //room.bookings = req...
+  room.title = title;
+  room.minMembers = minMembers;
+  room.maxMembers = maxMembers;
+  room.isEnabled = isEnabled;
+  room.description = description;
+  room.pictures = pictures;
+
+  room.save()
+    .then(() => {
+      res.redirect('/api/rooms/')
+    })
+
+});
+
+//Bookings GET
 router.get('/bookings/', function(req, res, next) {
   Booking.find()
     .then(bookings => {
@@ -55,7 +91,16 @@ router.get('/bookings/', function(req, res, next) {
     })
 });
 
-router.post('/bookings/', (req, res) => {
+//Bookings GET JSON
+router.get('/api/bookings/', function(req, res, next) {
+  Booking.find()
+    .then(bookings => {
+        res.json(bookings)
+      })
+});
+
+//Bookings POST
+router.post('/bookings/new/', (req, res) => {
   const organiserName = req.body.organiserName;
   const organiserEmail = req.body.organiserEmail;
   const date = req.body.date;
@@ -79,6 +124,35 @@ router.post('/bookings/', (req, res) => {
   booking.save()
     .then(() => {
       res.redirect('/bookings/')
+    })
+
+});
+
+//Bookings POST JSON
+router.post('/api/bookings/new', (req, res) => {
+  const organiserName = req.query.organiserName;
+  const organiserEmail = req.query.organiserEmail;
+  const date = req.query.date;
+  const notes = req.query.notes;
+  const hasPaid = req.query.hasPaid;
+  const teamName = req.query.teamName;
+  // const teamMembers = req.body.teamMembers;
+  // const stats = req.body.stats;
+
+  let booking = new Booking();
+  booking.roomId = req.query.roomId
+  booking.organiserName = organiserName;
+  booking.organiserEmail = organiserEmail;
+  booking.date = date;
+  booking.notes = notes;
+  booking.hasPaid = hasPaid;
+  booking.teamName = teamName;
+  // booking.teamMembers = teamMembers;
+  // booking.stats = stats;
+
+  booking.save()
+    .then(() => {
+      res.redirect('/api/bookings/')
     })
 
 });

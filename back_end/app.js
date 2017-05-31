@@ -14,7 +14,8 @@ require('dotenv').config()
 
 var app = express();
 
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds157571.mlab.com:57571/sydney-escape`)
+// mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds157571.mlab.com:57571/sydney-escape`)
+mongoose.connect(`mongodb://localhost/sydney-escape`)
 const { connection: db } = mongoose;
 
 db.on('error', console.error.bind(console, 'connection error:'));
