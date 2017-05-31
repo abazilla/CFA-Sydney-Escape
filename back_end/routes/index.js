@@ -4,33 +4,41 @@ var router = express.Router();
 const Room = require('../models/Room');
 const Booking = require('../models/Booking');
 
-//root GET
+// root GET
 router.get('/', function(req, res, next) {
-      res.render('index', {
-        title: 'index'
-      })
+  res.render('index', {
+    title: 'index'
+  })
 });
 
-//Rooms GET
+// Rooms GET
 router.get('/rooms/', function(req, res, next) {
   Room.find()
-    .then(rooms => {
-      res.render('rooms', {
-        title: 'Rooms',
-        rooms: rooms
-      })
+  .then(rooms => {
+    res.render('rooms', {
+      title: 'Rooms',
+      rooms: rooms
     })
+  })
 });
 
-//Rooms GET JSON
+// Rooms GET JSON
 router.get('/api/rooms/', function(req, res, next) {
   Room.find()
-    .then(rooms => {
-        res.json(rooms)
-      })
+  .then(rooms => {
+    res.json(rooms)
+  })
 });
 
-//Rooms POST
+// Single Room GET JSON
+router.get('/api/rooms/:id', function(req, res, next) {
+  Room.findOne({_id: req.params.id})
+  .then(room => {
+    res.json(room)
+  })
+});
+
+// Rooms POST
 router.post('/rooms/', (req, res) => {
   const title = req.body.title;
   const minMembers = req.body.minMembers;
@@ -49,13 +57,13 @@ router.post('/rooms/', (req, res) => {
   room.pictures = pictures;
 
   room.save()
-    .then(() => {
-      res.redirect('/rooms/')
-    })
+  .then(() => {
+    res.redirect('/rooms/')
+  })
 
 });
 
-//Rooms POST JSON
+// Rooms POST JSON
 router.post('/api/rooms/new/', (req, res) => {
   const title = req.query.title;
   const minMembers = req.query.minMembers;
@@ -74,32 +82,68 @@ router.post('/api/rooms/new/', (req, res) => {
   room.pictures = pictures;
 
   room.save()
-    .then(() => {
-      res.redirect('/api/rooms/')
-    })
+  .then(() => {
+    res.redirect('/api/rooms/')
+  })
 
 });
 
-//Bookings GET
+//Rooms EDIT JSON
+router.put('/api/rooms/:id/edit/', (req, res) => {
+  Room.findOneAndUpdate({ _id: req.params.id}, req.query, {
+    new: true
+  })
+  .then(() => {
+    res.redirect(`/api/rooms/${req.params.id}`);
+  });
+})
+
+// Rooms DELETE JSON
+router.delete('/api/rooms/:id/', (req, res) => {
+  Room.findOneAndRemove({ _id: req.params.id})
+  .then(() => {
+    res.redirect('/api/rooms');
+  });
+})
+
+// Bookings GET
 router.get('/bookings/', function(req, res, next) {
   Booking.find()
-    .then(bookings => {
-      res.render('bookings', {
-        title: 'Bookings',
-        bookings: bookings
-      })
+  .then(bookings => {
+    // room = Room.findOne({ _id: bookings.roomId })
+    res.render('bookings', {
+      title: 'Bookings',
+      bookings: bookings,
+      room: room
     })
+  })
 });
 
-//Bookings GET JSON
+// Bookings GET JSON
 router.get('/api/bookings/', function(req, res, next) {
   Booking.find()
-    .then(bookings => {
-        res.json(bookings)
-      })
+  .then(bookings => {
+    res.json(bookings)
+  })
 });
 
-//Bookings POST
+// Bookings with roomID GET JSON
+router.get('/api/bookings/rooms/:roomId/', function(req, res, next) {
+  Booking.find({roomId: req.params.roomId})
+  .then(booking => {
+    res.json(booking)
+  })
+});
+
+// Single Booking GET JSON
+router.get('/api/bookings/:id', function(req, res, next) {
+  Booking.findOne({_id: req.params.id})
+  .then(booking => {
+    res.json(booking)
+  })
+});
+
+// Bookings POST
 router.post('/bookings/new/', (req, res) => {
   const organiserName = req.body.organiserName;
   const organiserEmail = req.body.organiserEmail;
@@ -122,14 +166,14 @@ router.post('/bookings/new/', (req, res) => {
   // booking.stats = stats;
 
   booking.save()
-    .then(() => {
-      res.redirect('/bookings/')
-    })
+  .then(() => {
+    res.redirect('/bookings/')
+  })
 
 });
 
-//Bookings POST JSON
-router.post('/api/bookings/new', (req, res) => {
+// Bookings POST JSON
+router.post('/api/bookings/new/', (req, res) => {
   const organiserName = req.query.organiserName;
   const organiserEmail = req.query.organiserEmail;
   const date = req.query.date;
@@ -151,10 +195,28 @@ router.post('/api/bookings/new', (req, res) => {
   // booking.stats = stats;
 
   booking.save()
-    .then(() => {
-      res.redirect('/api/bookings/')
-    })
+  .then(() => {
+    res.redirect('/api/bookings/')
+  })
 
 });
+
+//Bookings EDIT JSON
+router.put('/api/bookings/:id/edit/', (req, res) => {
+  Booking.findOneAndUpdate({ _id: req.params.id}, req.query, {
+    new: true
+  })
+  .then(() => {
+    res.redirect(`/api/bookings/${req.params.id}`);
+  });
+})
+
+// Bookings DELETE JSON
+router.delete('/api/bookings/:id/', (req, res) => {
+  Booking.findOneAndRemove({ _id: req.params.id})
+  .then(() => {
+    res.redirect('/api/bookings');
+  });
+})
 
 module.exports = router;

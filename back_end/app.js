@@ -35,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//index being which router file to use
 app.use('/', index);
 app.use('/bookings', index);
 app.use('/rooms', index);
