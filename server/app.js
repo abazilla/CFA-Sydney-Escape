@@ -4,20 +4,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 require('dotenv').config()
 
-var app = express();
-
-// This is the mLab server mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds157571.mlab.com:57571/sydney-escape`)
+// This is the mLab server || TODO - convert whole url to the env mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds157571.mlab.com:57571/sydney-escape`)
 // This is the local server
 mongoose.connect(`mongodb://localhost/sydney-escape`)
 const { connection: db } = mongoose;
+
+var index = require('./routes/index');
+const apiv1 = require('./routes/api/v1/index');
+var users = require('./routes/users');
+
+var app = express();
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
@@ -45,14 +46,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 // passport.use('local-signup', localSignupStrategy);
 // passport.use('local-login', localLoginStrategy);
 //
-// // pass the authenticaion checker middleware
+// pass the authenticaion checker middleware
 // const authCheckMiddleware = require('./middleware/auth-check');
 // app.use('/api', authCheckMiddleware);
+
+const authRoutes = require('./routes/auth');
+app.use('/auth', authRoutes);
 
 //index being which router file to use
 app.use('/', index);
 app.use('/bookings', index);
 app.use('/rooms', index);
+app.use('/api/v1', apiv1);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

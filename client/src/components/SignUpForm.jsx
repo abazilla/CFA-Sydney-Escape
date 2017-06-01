@@ -17,7 +17,6 @@ const SignUpForm = ({
       <div className="field-line">
         Name
         <input
-          floatingLabelText="Name"
           name="name"
           errorText={errors.name}
           onChange={onChange}
