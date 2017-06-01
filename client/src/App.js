@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import { BrowserRouter, Router } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+
+// remove tap delay, essential for MaterialUI to work properly
+injectTapEventPlugin();
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <div>
+
+        <div className="top-bar">
+          <div className="top-bar-left">
+            <NavLink to="/">React App</NavLink>
+          </div>
+
+          <div className="top-bar-right">
+            <Link to="/login">Log in</Link>
+            <Link to="/signup">Sign up</Link>
+          </div>
+
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {/* {children} */}
+
       </div>
     );
   }

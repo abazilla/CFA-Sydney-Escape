@@ -35,19 +35,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// pass the passport middleware
-app.use(passport.initialize());
-
-// load passport strategies
-const localSignupStrategy = require('./passport/local-signup');
-const localLoginStrategy = require('./passport/local-login');
-passport.use('local-signup', localSignupStrategy);
-passport.use('local-login', localLoginStrategy);
-
-// pass the authenticaion checker middleware
-const authCheckMiddleware = require('./middleware/auth-check');
-app.use('/api', authCheckMiddleware);
+//
+// // pass the passport middleware
+// app.use(passport.initialize());
+//
+// // load passport strategies
+// const localSignupStrategy = require('./passport/local-signup');
+// const localLoginStrategy = require('./passport/local-login');
+// passport.use('local-signup', localSignupStrategy);
+// passport.use('local-login', localLoginStrategy);
+//
+// // pass the authenticaion checker middleware
+// const authCheckMiddleware = require('./middleware/auth-check');
+// app.use('/api', authCheckMiddleware);
 
 //index being which router file to use
 app.use('/', index);
