@@ -106,6 +106,7 @@ router.delete('/api/rooms/:id/', (req, res) => {
   });
 })
 
+// TODO Using API, how do i get the room JSON from the bookings roomID JSON
 // Bookings GET
 router.get('/bookings/', function(req, res, next) {
   Booking.find()
@@ -114,7 +115,6 @@ router.get('/bookings/', function(req, res, next) {
     res.render('bookings', {
       title: 'Bookings',
       bookings: bookings,
-      room: room
     })
   })
 });
