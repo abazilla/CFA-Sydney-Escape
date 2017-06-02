@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Auth from '../modules/Auth';
 import LoginForm from '../components/LoginForm.jsx';
 
@@ -61,12 +62,11 @@ class LoginPage extends React.Component {
           errors: {}
         });
 
-        // save the token
+        // save the token into local storage
         Auth.authenticateUser(xhr.response.token);
 
-
-        // change the current URL to /
-        this.context.router.replace('/');
+        // redirect signed in user to dashboard
+        this.props.history.push('/dashboard');
       } else {
         // failure
 

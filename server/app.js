@@ -7,15 +7,16 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const config = require('../config');
+const cors = require('cors')
 
 require('dotenv').config()
 
 // connect to the database and load models
-require('./models').connect(config.dbUri);
+require('./models').connect(`mongodb://localhost/sydney-escape`);
 
 // This is the mLab server || TODO - convert whole url to the env mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds157571.mlab.com:57571/sydney-escape`)
 // This is the local server
-mongoose.createConnection(`mongodb://localhost/sydney-escape`)
+// mongoose.createConnection(`mongodb://localhost/sydney-escape`)
 const { connection: db } = mongoose;
 
 var index = require('./routes/index');
@@ -23,6 +24,8 @@ const apiv1 = require('./routes/api/v1/index');
 var users = require('./routes/users');
 
 var app = express();
+
+app.use(cors())
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
