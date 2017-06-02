@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { BrowserRouter, Router } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
+import Auth from './modules/Auth';
 
 // remove tap delay, essential for MaterialUI to work properly
 injectTapEventPlugin();
@@ -16,10 +17,16 @@ class App extends Component {
             <NavLink to="/">React App</NavLink>
           </div>
 
-          <div className="top-bar-right">
-            <Link to="/login">Log in</Link>
-            <Link to="/signup">Sign up</Link>
-          </div>
+          {Auth.isUserAuthenticated() ? (
+            <div className="top-bar-right">
+              <Link to="/logout">Log out</Link>
+            </div>
+          ) : (
+            <div className="top-bar-right">
+              <Link to="/login">Log in</Link>
+              <Link to="/signup">Sign up</Link>
+            </div>
+          )}
 
         </div>
         {/* {children} */}
