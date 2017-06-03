@@ -63,6 +63,7 @@ class LoginPage extends React.Component {
         });
 
         // save the token into local storage
+        console.log(xhr.response.token)
         Auth.authenticateUser(xhr.response.token);
 
         // redirect signed in user to dashboard
