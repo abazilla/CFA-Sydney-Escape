@@ -3,6 +3,7 @@ import Auth from '../modules/Auth';
 import Dashboard from '../components/Dashboard.jsx';
 import CreateRoomForm from '../components/CreateRoomForm.jsx';
 import CreateBookingForm from '../components/CreateBookingForm.jsx';
+import { Link } from 'react-router-dom';
 
 class DashboardPage extends React.Component {
 
@@ -42,7 +43,8 @@ class DashboardPage extends React.Component {
     this.createNewBooking = this.createNewBooking.bind(this);
     this.changeRoom = this.changeRoom.bind(this);
     this.changeBooking = this.changeBooking.bind(this);
-
+    this.roomIdCallback = this.roomIdCallback.bind(this);
+    this.deleteRoom = this.deleteRoom.bind(this);
 
   }
 
@@ -137,8 +139,8 @@ class DashboardPage extends React.Component {
         // save the token into local storage
         localStorage.setItem('successMessage', xhr.response.message);
 
-        // redirect to dashboard
-        this.props.history.push('/dashboard');
+        // reload page
+        window.location.reload();
       } else {
         // failure
 
@@ -188,8 +190,8 @@ class DashboardPage extends React.Component {
         // save the token into local storage
         localStorage.setItem('successMessage', xhr.response.message);
 
-        // redirect to dashboard
-        this.props.history.push('/dashboard');
+        // reload page
+        window.location.reload();
       } else {
         // failure
 
@@ -229,15 +231,60 @@ class DashboardPage extends React.Component {
   });
 }
 
+roomIdCallback(roomFromChild) {
+  this.setState({ deleteRoomId: `${roomFromChild}`})
+}
+
+deleteRoom() {
+  // create a string for an HTTP body message
+  // TODO = get the array &object id things working
+  const id = encodeURIComponent(this.state.deleteRoomId);
+  const formData = `${id}`;
+  console.log(`formData: ${formData}`)
+
+  // create an AJAX request
+  const xhr = new XMLHttpRequest();
+  xhr.open('delete', `http://localhost:3000/api/rooms/${formData}`);
+  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', () => {
+    if (xhr.status === 200) {
+      // success
+
+      // change the component-container state
+      this.setState({
+        errors: {}
+      });
+
+      // save the token into local storage
+      localStorage.setItem('successMessage', xhr.response.message);
+
+      // redirect to dashboard
+      this.props.history.push('/dashboard');
+    } else {
+      // failure
+
+      // change the component state
+      const errors = xhr.response.errors ? xhr.response.errors : {};
+      errors.summary = xhr.response.message;
+
+      this.setState({
+        errors
+      });
+    }
+  });
+  xhr.send(formData);
+}
+
   /**
    * Render the component.
    */
   render() {
     return (
       <div>
-        <Dashboard secretData={this.state.secretData} rooms={this.state.rooms} bookings={this.state.bookings} />
         <CreateRoomForm onSubmit={this.createNewRoom} onChange={this.changeRoom} errors={this.state.errors} room={this.state.room} />
         <CreateBookingForm onSubmit={this.createNewBooking} onChange={this.changeBooking} errors={this.state.errors} booking={this.state.booking} />
+        <Dashboard secretData={this.state.secretData} rooms={this.state.rooms} bookings={this.state.bookings} roomIdCallback={this.roomIdCallback}  />
       </div>
     );
   }

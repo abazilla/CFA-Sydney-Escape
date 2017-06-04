@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import ModifyButtons from '../components/ModifyButtons.jsx';
 
 
-const Dashboard = ({ secretData, rooms, bookings }) => (
+const Dashboard = ({ secretData, rooms, bookings, roomIdCallback }) => (
   <div className="container">
     <p>
       "Dashboard"
@@ -21,6 +23,7 @@ const Dashboard = ({ secretData, rooms, bookings }) => (
           <li><b>Members:</b> {room.minMembers} to {room.maxMembers} </li>
           <li><b>isEnabled:</b> {room.isEnabled} </li>
           <li><b>pictures:</b> {room.pictures} </li>
+          <li> <ModifyButtons id={room._id} type="rooms"/> </li>
           <br/>
         </div>
       ))}
@@ -40,6 +43,7 @@ const Dashboard = ({ secretData, rooms, bookings }) => (
           <li><b>hasPaid:</b> {booking.hasPaid} </li>
           <li><b>Stats:</b> {booking.isEnabled} </li>
           <li><b>teamMembers:</b> {booking.pictures} </li>
+          <li> <ModifyButtons id={booking._id} type="bookings" /></li>
           <br/>
         </div>
       ))}
