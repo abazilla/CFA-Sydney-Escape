@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ModifyButtons from '../components/ModifyButtons.jsx';
 
-
 const Dashboard = ({ secretData, rooms, bookings, roomIdCallback }) => (
   <div className="container">
     <p>

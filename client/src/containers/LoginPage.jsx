@@ -68,6 +68,7 @@ class LoginPage extends React.Component {
 
         // redirect signed in user to dashboard
         this.props.history.push('/dashboard');
+        window.location.reload();
       } else {
         // failure
 

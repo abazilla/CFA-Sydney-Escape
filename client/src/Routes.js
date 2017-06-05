@@ -1,3 +1,5 @@
+// TODO - delete this file
+
 import App from './App';
 import HomePage from './components/HomePage.jsx';
 import LoginPage from './containers/LoginPage.jsx';

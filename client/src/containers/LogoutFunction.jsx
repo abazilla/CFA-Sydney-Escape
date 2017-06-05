@@ -10,6 +10,7 @@ class LogoutFunction extends React.Component {
     Auth.deauthenticateUser();
     // change the current URL to / after logout
     this.props.history.push('/');
+    window.location.reload();
   }
 
   render() {

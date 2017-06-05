@@ -59,6 +59,8 @@ class SignUpPage extends React.Component {
 
         // redirect user after sign up to login page
         this.props.history.push('/login');
+        window.location.reload();
+
       } else {
         // failure
 
