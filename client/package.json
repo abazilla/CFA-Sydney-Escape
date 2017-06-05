@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cloudinary-react": "^1.0.4",
+    "dotenv": "^4.0.0",
     "re-bulma": "^0.4.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-stripe-checkout": "^2.4.0",
     "react-tap-event-plugin": "^2.0.1",
     "validator": "^7.0.0"
   },

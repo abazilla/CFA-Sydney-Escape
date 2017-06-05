@@ -1,4 +1,5 @@
 {
   "dbUri": "mongodb://localhost/react_app",
-  "jwtSecret": "a secret phrase!!"
+  "jwtSecret": "a secret phrase!!",
+  "Stripe_PK": "pk_test_sKxuJtLeLqifb1w8YG1s8g9U"
 }

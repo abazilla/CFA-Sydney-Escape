@@ -48,6 +48,16 @@ const CreateBookingSlotForm = ({
           value={bookingSlot.room}
         />
       </div>
+      <div className="field-line">
+        price
+        <input
+          type="text"
+          name="text"
+          errorText={errors.price}
+          onChange={onChange}
+          value={bookingSlot.price}
+        />
+      </div>
 
       <div className="field-line">
         available

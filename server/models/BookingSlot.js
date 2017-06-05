@@ -9,6 +9,7 @@ const bookingSlotSchema = new Schema({
     time: Date,
     room: ObjectId,
     available: Boolean,
+    price: Number,
 })
 
 const BookingSlot = mongoose.model('BookingSlot', bookingSlotSchema);

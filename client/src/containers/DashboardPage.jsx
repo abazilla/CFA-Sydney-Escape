@@ -5,6 +5,9 @@ import CreateRoomForm from '../components/CreateRoomForm.jsx';
 import CreateBookingForm from '../components/CreateBookingForm.jsx';
 import CreateBookingSlotForm from '../components/CreateBookingSlotForm.jsx';
 import { Link } from 'react-router-dom';
+import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
+
+
 
 class DashboardPage extends React.Component {
 
@@ -44,6 +47,7 @@ class DashboardPage extends React.Component {
         time: '',
         room: '',
         available: '',
+        price: '',
       },
     };
 
@@ -243,7 +247,9 @@ class DashboardPage extends React.Component {
     const time = encodeURIComponent(this.state.bookingSlot.time);
     const room = encodeURIComponent(this.state.bookingSlot.room);
     const available = encodeURIComponent(this.state.bookingSlot.available);
-    const formData = `?date=${date}&time=${time}&room=${room}&available=${available}`;
+    const price = encodeURIComponent(this.state.bookingSlot.price);
+    // TODO add &room=${room}
+    const formData = `?date=${date}&time=${time}&available=${available}&price=${price}`;
     console.log(`formData: ${formData}`)
 
     // create an AJAX request
@@ -326,6 +332,13 @@ class DashboardPage extends React.Component {
         <CreateBookingForm onSubmit={this.createNewBooking} onChange={this.changeBooking} errors={this.state.errors} booking={this.state.booking} bookingslo />
         <CreateBookingSlotForm onSubmit={this.createNewBookingSlot} onChange={this.changeBookingSlot} errors={this.state.errors} bookingSlot={this.state.bookingSlot} />
         <Dashboard secretData={this.state.secretData} rooms={this.state.rooms} bookings={this.state.bookings} bookingSlots={this.state.bookingSlots} />
+        <h1>Hello, world!</h1>
+        <Image cloudName="demo" publicId="sample" width="300" crop="scale"/>
+<CloudinaryContext cloudName="demo">
+    <Image publicId="sample">
+        <Transformation width="200" crop="scale" angle="10"/>
+    </Image>
+</CloudinaryContext>
       </div>
     );
   }

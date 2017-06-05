@@ -229,12 +229,21 @@ router.get('/api/bookingslots/', function(req, res, next) {
   })
 });
 
-// BookingSlot POST JSON
+// Single BookingSlots GET JSON
+router.get('/api/bookingslots/:id', function(req, res, next) {
+  BookingSlots.findOne({_id: req.params.id})
+  .then(bookingSlots => {
+    res.json(bookingSlots)
+  })
+});
+
+// BookingSlots POST JSON
 router.post('/api/bookingslots/new/', (req, res) => {
   const date = req.query.date;
   const time = req.query.time;
   const room = req.query.room;
   const available = req.query.available;
+  const price = req.query.price;
 
   let bookingslot = new BookingSlot();
   //bookingslot.bookings = req...
@@ -242,6 +251,7 @@ router.post('/api/bookingslots/new/', (req, res) => {
   bookingslot.time = time;
   bookingslot.room = room;
   bookingslot.available = available;
+  bookingslot.price = price;
 
   bookingslot.save()
   .then(() => {
@@ -250,7 +260,7 @@ router.post('/api/bookingslots/new/', (req, res) => {
 
 });
 
-//Bookings EDIT JSON
+// Bookingslots EDIT JSON
 router.put('/api/bookingslots/:id/edit/', (req, res) => {
   BookingSlot.findOneAndUpdate({ _id: req.params.id}, req.query, {
     new: true
