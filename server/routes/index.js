@@ -3,6 +3,7 @@ var router = express.Router();
 
 const Room = require('../models/Room');
 const Booking = require('../models/Booking');
+const BookingSlot = require('../models/BookingSlot');
 
 // root GET
 router.get('/', function(req, res, next) {
@@ -216,6 +217,54 @@ router.delete('/api/bookings/:id/', (req, res) => {
   Booking.findOneAndRemove({ _id: req.params.id})
   .then(() => {
     res.redirect('/api/bookings');
+  });
+})
+
+
+// BookingSlot GET JSON
+router.get('/api/bookingslots/', function(req, res, next) {
+  BookingSlot.find()
+  .then(bookingSlots => {
+    res.json(bookingSlots)
+  })
+});
+
+// BookingSlot POST JSON
+router.post('/api/bookingslots/new/', (req, res) => {
+  const date = req.query.date;
+  const time = req.query.time;
+  const room = req.query.room;
+  const available = req.query.available;
+
+  let bookingslot = new BookingSlot();
+  //bookingslot.bookings = req...
+  bookingslot.date = date;
+  bookingslot.time = time;
+  bookingslot.room = room;
+  bookingslot.available = available;
+
+  bookingslot.save()
+  .then(() => {
+    res.redirect('/api/bookingslots/')
+  })
+
+});
+
+//Bookings EDIT JSON
+router.put('/api/bookingslots/:id/edit/', (req, res) => {
+  BookingSlot.findOneAndUpdate({ _id: req.params.id}, req.query, {
+    new: true
+  })
+  .then(() => {
+    res.redirect(`/api/bookingslots/${req.params.id}`);
+  });
+})
+
+// Bookingslots DELETE JSON
+router.delete('/api/bookingslots/:id/', (req, res) => {
+  BookingSlot.findOneAndRemove({ _id: req.params.id})
+  .then(() => {
+    res.redirect('/api/bookingslots');
   });
 })
 

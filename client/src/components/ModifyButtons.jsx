@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Auth from '../modules/Auth';
 import { Link } from 'react-router-dom';
+import { CardFooter, CardFooterItem } from 're-bulma';
 
 class ModifyButtons extends Component {
   constructor(props, context) {
@@ -9,10 +10,10 @@ class ModifyButtons extends Component {
   }
 
   /**
-   * Process the form.
-   *
-   * @param {object} event - the JavaScript event object
-   */
+  * Process the form.
+  *
+  * @param {object} event - the JavaScript event object
+  */
 
   deleteRoom() {
     // create an AJAX request
@@ -34,12 +35,10 @@ class ModifyButtons extends Component {
 
   render() {
     return (
-      <div>
-          <div >
-            <a> Edit </a>
-            <a href="" onClick={this.deleteRoom}> Delete </a>
-          </div>
-      </div>
+      <span>
+        <CardFooterItem> Edit </CardFooterItem>
+        <CardFooterItem> Delete </CardFooterItem>
+      </span>
     );
   }
 }

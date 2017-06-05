@@ -58,7 +58,7 @@ class App extends Component {
             <Route path="/signup" component={SignUpPage}/>
             <Route path="/dashboard" component={DashboardPage}/>
             <Route path="/logout" component={LogoutFunction}/>
-            <Route path="/bookings" component={BookingsPage}/>
+            <Route path="/bookings" component={ () => (<BookingsPage bookingSlots={[ "1"]} />)}/>
           </Switch>
           {/* {children} */}
           <Footer>
