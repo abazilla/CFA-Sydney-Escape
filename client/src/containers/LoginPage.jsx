@@ -90,6 +90,7 @@ class LoginPage extends React.Component {
    * @param {object} event - the JavaScript event object
    */
   changeUser(event) {
+    // TODO change email to lower case
     const field = event.target.name;
     const user = this.state.user;
     user[field] = event.target.value;
