@@ -18,7 +18,7 @@ class ModifyButtons extends Component {
   deleteRoom() {
     // create an AJAX request
     const xhr = new XMLHttpRequest();
-    xhr.open('DELETE', `http://localhost:3000/api/${this.props.type}/${this.props.id}`);
+    xhr.open('DELETE', `${process.env.REACT_APP_API_ENDPOINT}/api/${this.props.type}/${this.props.id}`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // set the authorization HTTP header
     xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);

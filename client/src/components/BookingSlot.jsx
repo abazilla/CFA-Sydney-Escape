@@ -66,7 +66,7 @@ class BookingSlot extends React.Component {
 
     // create an AJAX request
     const xhr = new XMLHttpRequest();
-    xhr.open('post', `http://localhost:3000/api/bookings/new${formData}`);
+    xhr.open('post', `${process.env.REACT_APP_API_ENDPOINT}/api/bookings/new${formData}`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.send(formData);
@@ -88,13 +88,13 @@ class BookingSlot extends React.Component {
 
   updateBookingSlot() {
     const xhr = new XMLHttpRequest();
-    xhr.open('put', `http://localhost:3000/api/bookingslots/${this.props.bookingSlot._id}/edit/?available=false`);
+    xhr.open('put', `${process.env.REACT_APP_API_ENDPOINT}/api/bookingslots/${this.props.bookingSlot._id}/edit/?available=false`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // set the authorization HTTP header
     xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
     xhr.responseType = 'json';
     xhr.send();
-    window.location.reload();
+    setTimeout(window.location.reload(), 500);
   }
 
   render() {

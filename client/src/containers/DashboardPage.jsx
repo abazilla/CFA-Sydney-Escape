@@ -72,7 +72,7 @@ class DashboardPage extends React.Component {
 
   authToken() {
     const xhr = new XMLHttpRequest();
-    xhr.open('get', 'http://localhost:3000/api/dashboard');
+    xhr.open('get', `${process.env.REACT_APP_API_ENDPOINT}/api/dashboard`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // set the authorization HTTP header
     xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
@@ -89,7 +89,7 @@ class DashboardPage extends React.Component {
 
   getRooms() {
     const xhr = new XMLHttpRequest();
-    xhr.open('get', 'http://localhost:3000/api/rooms');
+    xhr.open('get', `${process.env.REACT_APP_API_ENDPOINT}/api/rooms`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // set the authorization HTTP header
     xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
@@ -107,7 +107,7 @@ class DashboardPage extends React.Component {
 
   getBookings() {
     const xhr = new XMLHttpRequest();
-    xhr.open('get', 'http://localhost:3000/api/bookings');
+    xhr.open('get', `${process.env.REACT_APP_API_ENDPOINT}/api/bookings`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // set the authorization HTTP header
     xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
@@ -125,7 +125,7 @@ class DashboardPage extends React.Component {
 
   getBookingSlots() {
     const xhr = new XMLHttpRequest();
-    xhr.open('get', 'http://localhost:3000/api/bookingslots');
+    xhr.open('get', `${process.env.REACT_APP_API_ENDPOINT}/api/bookingslots`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // set the authorization HTTP header
     xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
@@ -155,7 +155,7 @@ class DashboardPage extends React.Component {
 
     // create an AJAX request
     const xhr = new XMLHttpRequest();
-    xhr.open('post', `http://localhost:3000/api/rooms/new${formData}`);
+    xhr.open('post', `${process.env.REACT_APP_API_ENDPOINT}/api/rooms/new${formData}`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
@@ -208,7 +208,7 @@ class DashboardPage extends React.Component {
 
     // create an AJAX request
     const xhr = new XMLHttpRequest();
-    xhr.open('post', `http://localhost:3000/api/bookings/new${formData}`);
+    xhr.open('post', `${process.env.REACT_APP_API_ENDPOINT}/api/bookings/new${formData}`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
@@ -256,7 +256,7 @@ class DashboardPage extends React.Component {
 
     // create an AJAX request
     const xhr = new XMLHttpRequest();
-    xhr.open('post', `http://localhost:3000/api/bookingslots/new${formData}`);
+    xhr.open('post', `${process.env.REACT_APP_API_ENDPOINT}/api/bookingslots/new${formData}`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {

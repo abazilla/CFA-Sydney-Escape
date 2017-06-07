@@ -18,7 +18,7 @@ class RoomPage extends React.Component {
 
   getRooms() {
     const xhr = new XMLHttpRequest();
-    xhr.open('get', 'http://localhost:3000/api/rooms');
+    xhr.open('get', `${process.env.REACT_APP_API_ENDPOINT}/api/rooms`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // set the authorization HTTP header
     xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);

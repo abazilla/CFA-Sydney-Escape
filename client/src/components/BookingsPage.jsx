@@ -21,7 +21,7 @@ class BookingsPage extends React.Component {
 
   getBookingSlots() {
     const xhr = new XMLHttpRequest();
-    xhr.open('get', 'http://localhost:3000/api/bookingslots');
+    xhr.open('get', `${process.env.REACT_APP_API_ENDPOINT}/api/bookingslots`);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // set the authorization HTTP header
     xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
@@ -46,7 +46,7 @@ class BookingsPage extends React.Component {
         <Columns isMultiline>
 
           {this.state.bookingSlots.map((bookingSlot, i) => (
-            <BookingSlot key={i} bookingSlot={bookingSlot} />
+            <BookingSlot key={i} bookingSlot={bookingSlot} getBookingSlots={() => this.getBookingSlots()} />
 
           ))}
         </Columns>

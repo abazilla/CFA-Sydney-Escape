@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const config = require('../config');
+// const config = require('../config');
 const cors = require('cors')
 
 require('dotenv').config()
