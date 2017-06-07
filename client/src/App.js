@@ -16,6 +16,8 @@ import Auth from './modules/Auth';
 
 import { Nav, NavGroup, NavItem, Hero, Footer, Container, Content } from 're-bulma';
 
+require('dotenv').config()
+
 class App extends Component {
   render() {
     return (

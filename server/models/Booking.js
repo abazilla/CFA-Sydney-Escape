@@ -6,6 +6,7 @@ const ObjectId = require('mongoose').Schema.ObjectId
 const bookingSchema = new Schema({
   //get the object ID from params or maybe forms
   roomId: ObjectId,
+  bookingSlotId: ObjectId,
   createdAt: {
     type: Date,
     default: Date.now
@@ -21,13 +22,15 @@ const bookingSchema = new Schema({
   date: {
     type: Date
   },
+  time: {
+    type: Date
+  },
+  price: {
+    type: Number
+  },
   notes: {
     type: String,
     trim: true
-  },
-  hasPaid: {
-    type: Boolean,
-    default: false
   },
   teamName: {
     type: String,

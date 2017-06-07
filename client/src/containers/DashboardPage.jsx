@@ -5,6 +5,7 @@ import CreateRoomForm from '../components/CreateRoomForm.jsx';
 import CreateBookingForm from '../components/CreateBookingForm.jsx';
 import CreateBookingSlotForm from '../components/CreateBookingSlotForm.jsx';
 import { Link } from 'react-router-dom';
+import { Column, Columns, Container, Section } from 're-bulma';
 
 class DashboardPage extends React.Component {
 
@@ -32,12 +33,14 @@ class DashboardPage extends React.Component {
         teamName: '',
         notes: '',
         date: '',
+        time: '',
+        price: '',
         organiserName: '',
         organiserEmail: '',
         roomId: '',
+        bookingSlotId: '',
         stats: [],
         teamMembers: [],
-        hasPaid: [],
       },
       bookingSlot: {
         date: '',
@@ -192,13 +195,15 @@ class DashboardPage extends React.Component {
     const teamName = encodeURIComponent(this.state.booking.teamName);
     const notes = encodeURIComponent(this.state.booking.notes);
     const date = encodeURIComponent(this.state.booking.date);
+    const time = encodeURIComponent(this.state.booking.time);
+    const price = encodeURIComponent(this.state.booking.price);
     const organiserName = encodeURIComponent(this.state.booking.organiserName);
     const organiserEmail = encodeURIComponent(this.state.booking.organiserEmail);
     const roomId = encodeURIComponent(this.state.booking.roomId);
+    const bookingSlotId = encodeURIComponent(this.state.booking.bookingSlotId);
     const stats = encodeURIComponent(this.state.booking.stats);
     const teamMembers = encodeURIComponent(this.state.booking.teamMembers);
-    const hasPaid = encodeURIComponent(this.state.booking.hasPaid);
-    const formData = `?teamName=${teamName}&notes=${notes}&date=${date}&organiserName=${organiserName}&organiserEmail=${organiserEmail}`;
+    const formData = `?teamName=${teamName}&notes=${notes}&date=${date}&time=${time}&organiserName=${organiserName}&organiserEmail=${organiserEmail}&price=${price}`;
     console.log(`formData: ${formData}`)
 
     // create an AJAX request
@@ -246,7 +251,7 @@ class DashboardPage extends React.Component {
     const available = encodeURIComponent(this.state.bookingSlot.available);
     const price = encodeURIComponent(this.state.bookingSlot.price);
     // TODO add &room=${room}
-    const formData = `?date=${date}&time=${time}&available=${available}&price=${price}`;
+    const formData = `?date=${date}&time=${time}&price=${price}`;
     console.log(`formData: ${formData}`)
 
     // create an AJAX request
@@ -325,9 +330,21 @@ class DashboardPage extends React.Component {
   render() {
     return (
       <div>
-        <CreateRoomForm onSubmit={this.createNewRoom} onChange={this.changeRoom} errors={this.state.errors} room={this.state.room} />
-        <CreateBookingForm onSubmit={this.createNewBooking} onChange={this.changeBooking} errors={this.state.errors} booking={this.state.booking} />
-        <CreateBookingSlotForm onSubmit={this.createNewBookingSlot} onChange={this.changeBookingSlot} errors={this.state.errors} bookingSlot={this.state.bookingSlot} />
+        <Container>
+          <Section>
+            <Columns isMultiline>
+              <Column size="isOneThird">
+                <CreateRoomForm onSubmit={this.createNewRoom} onChange={this.changeRoom} errors={this.state.errors} room={this.state.room} />
+              </Column>
+              <Column size="isOneThird">
+                <CreateBookingForm onSubmit={this.createNewBooking} onChange={this.changeBooking} errors={this.state.errors} booking={this.state.booking} />
+              </Column>
+              <Column size="isOneThird">
+                <CreateBookingSlotForm onSubmit={this.createNewBookingSlot} onChange={this.changeBookingSlot} errors={this.state.errors} bookingSlot={this.state.bookingSlot} />
+              </Column>
+          </Columns>
+        </Section>
+        </Container>
         <Dashboard secretData={this.state.secretData} rooms={this.state.rooms} bookings={this.state.bookings} bookingSlots={this.state.bookingSlots} />
       </div>
     );

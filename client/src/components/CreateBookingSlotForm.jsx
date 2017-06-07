@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Card, CardHeader, CardHeaderTitle, CardContent, Content } from 're-bulma';
+
 // TODO - add errors
 
 const CreateBookingSlotForm = ({
@@ -10,9 +12,15 @@ const CreateBookingSlotForm = ({
   onChange,
   bookingSlot,
 }) => (
-  <div className="container">
+  <Card>
     <form action="/" onSubmit={onSubmit}>
-      <h2 className="card-heading">New Booking Slot</h2>
+    <CardHeader>
+      <CardHeaderTitle>
+        Create Booking Slot
+      </CardHeaderTitle>
+    </CardHeader>
+    <CardContent>
+      <Content>
 
       {successMessage && <p className="success-message">{successMessage}</p>}
       {errors.summary && <p className="error-message">{errors.summary}</p>}
@@ -42,7 +50,7 @@ const CreateBookingSlotForm = ({
         room
         <input
           type="text"
-          name="text"
+          name="room"
           errorText={errors.room}
           onChange={onChange}
           value={bookingSlot.room}
@@ -52,7 +60,7 @@ const CreateBookingSlotForm = ({
         price
         <input
           type="text"
-          name="text"
+          name="price"
           errorText={errors.price}
           onChange={onChange}
           value={bookingSlot.price}
@@ -62,7 +70,7 @@ const CreateBookingSlotForm = ({
       <div className="field-line">
         available
         <checkbox
-          name="organiserName"
+          name="available"
           errorText={errors.available}
           onChange={onChange}
           value={bookingSlot.available}
@@ -70,9 +78,10 @@ const CreateBookingSlotForm = ({
       </div>
 
         <button type="submit" label="">Make Booking Slot</button>
-
-    </form>
-  </div>
+      </Content>
+    </CardContent>
+  </form>
+</Card>
 );
 
 CreateBookingSlotForm.propTypes = {

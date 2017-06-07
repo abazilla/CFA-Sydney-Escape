@@ -12,9 +12,10 @@ const cors = require('cors')
 require('dotenv').config()
 
 // connect to the database and load models
-require('./models').connect(`mongodb://localhost/sydney-escape`);
+// require('./models').connect(`mongodb://localhost/sydney-escape`);
 
-// This is the mLab server || TODO - convert whole url to the env mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds157571.mlab.com:57571/sydney-escape`)
+// This is the mLab server || TODO - convert whole url to the env
+require('./models').connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds157571.mlab.com:57571/sydney-escape`)
 // This is the local server
 // mongoose.createConnection(`mongodb://localhost/sydney-escape`)
 const { connection: db } = mongoose;

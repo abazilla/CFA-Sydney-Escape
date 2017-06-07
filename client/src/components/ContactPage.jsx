@@ -1,5 +1,6 @@
 import React from 'react';
 import { Textarea, Container, Input, Label, Section, Column, Notification, Columns, Title, Subtitle, Icon } from 're-bulma';
+import GMap from './GMap';
 
 const style = { padding: '10px' };
 
@@ -7,12 +8,15 @@ const style = { padding: '10px' };
 const ContactPage = () => (
   <div>
     <Container>
-      <Section>
-        <Title>Have a question?</Title>
-      </Section>
-      <Columns>
-
-        <Column style={style}>
+      <Columns isMultiline>
+        <Column size="isFullwidth">
+          <Section>
+            <Title>Find us here!</Title>
+          </Section>
+        <GMap/>
+        <Title>or contact us!</Title>
+        </Column>
+        <Column size="isHalf" style={style}>
           <Notification color="isSuccess">
             <Title>Phone</Title>
             <Subtitle>Give us a ring</Subtitle>
@@ -27,8 +31,7 @@ const ContactPage = () => (
             </Column>
           </Notification>
         </Column>
-
-        <Column style={style}>
+        <Column size="isHalf" style={style}>
           <Notification color="isInfo">
             <Title>Email</Title>
             <Subtitle>Shoot us an email</Subtitle>

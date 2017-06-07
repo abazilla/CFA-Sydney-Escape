@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Card, CardHeader, CardHeaderTitle, CardContent, Content } from 're-bulma';
+
 // TODO - add errors
 
 const CreateBookingForm = ({
@@ -10,9 +12,15 @@ const CreateBookingForm = ({
   onChange,
   booking,
 }) => (
-  <div className="container">
+  <Card>
     <form action="/" onSubmit={onSubmit}>
-      <h2 className="card-heading">New Booking</h2>
+    <CardHeader>
+      <CardHeaderTitle>
+        Create Booking
+      </CardHeaderTitle>
+    </CardHeader>
+    <CardContent>
+      <Content>
 
       {successMessage && <p className="success-message">{successMessage}</p>}
       {errors.summary && <p className="error-message">{errors.summary}</p>}
@@ -56,6 +64,16 @@ const CreateBookingForm = ({
           value={booking.organiserName}
         />
       </div>
+
+      <div className="field-line">
+        price
+        <input
+          name="price"
+          errorText={errors.price}
+          onChange={onChange}
+          value={booking.price}
+        />
+      </div>
       <div className="field-line">
         organiserEmail
         <input
@@ -73,6 +91,15 @@ const CreateBookingForm = ({
           errorText={errors.roomId}
           onChange={onChange}
           value={booking.roomId}
+        />
+      </div>
+      <div className="field-line">
+        bookingSlotId
+        <input
+          name="bookingSlotId"
+          errorText={errors.bookingSlotId}
+          onChange={onChange}
+          value={booking.bookingSlotId}
         />
       </div>
 
@@ -107,9 +134,10 @@ const CreateBookingForm = ({
       </div>
 
         <button type="submit" label="">Make Booking</button>
-
-    </form>
-  </div>
+      </Content>
+    </CardContent>
+  </form>
+</Card>
 );
 
 CreateBookingForm.propTypes = {

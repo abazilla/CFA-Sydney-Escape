@@ -8,19 +8,14 @@ const style = { padding: '10px' };
 
 const Dashboard = ({ secretData, rooms, bookings, bookingSlots, roomIdCallback }) => (
   <Container>
-    <p>
-      "Dashboard"
-      "You should get access to this page only after authentication."
-    </p>
-
     {secretData}
     <Section>
       <Title>Rooms</Title>
       <Columns isMultiline>
-        {rooms.map((room, i) => (
-          <span key={i}>
-            <Column style={style}>
-              <Card isFullwidth>
+          {rooms.map((room, i) => (
+            <span key={i}>
+              <Column style={style}>
+              <Card >
                 <CardHeader>
                   <CardHeaderTitle>
                     {room.title}
@@ -44,8 +39,8 @@ const Dashboard = ({ secretData, rooms, bookings, bookingSlots, roomIdCallback }
                 </CardFooter>
               </Card>
             </Column>
-          </span>
-        ))}
+            </span>
+          ))}
       </Columns>
     </Section>
     <Section>
@@ -67,7 +62,9 @@ const Dashboard = ({ secretData, rooms, bookings, bookingSlots, roomIdCallback }
                       <li><b>ID:</b> {booking._id} </li>
                       <li><b>createdAt:</b> {booking.createdAt} </li>
                       <li><b>RoomID:</b> {booking.roomId} </li>
+                      <li><b>bookingSlotId:</b> {booking.bookingSlotId} </li>
                       <li><b>Date:</b> {booking.date} </li>
+                      <li><b>price:</b> {booking.price} </li>
                       <li><b>Organiser:</b> {booking.organiserName} </li>
                       <li><b>Organiser email:</b> {booking.organiserEmail} </li>
                       <li><b>hasPaid:</b> {booking.hasPaid} </li>

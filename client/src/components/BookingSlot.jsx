@@ -4,7 +4,6 @@ import StripeCheckout from 'react-stripe-checkout';
 import Auth from '../modules/Auth';
 import CreateBookingFormCustomer from './CreateBookingFormCustomer';
 
-
 const style = { padding: '10px' };
 
 class BookingSlot extends React.Component {
@@ -18,13 +17,15 @@ class BookingSlot extends React.Component {
         teamName: '',
         notes: '',
         date: '',
+        time: '',
+        price: '',
         organiserName: '',
         organiserEmail: '',
         roomId: '',
+        bookingSlotId: '',
         stats: [],
         teamMembers: [],
-        hasPaid: [],
-      }
+      },
     };
 
     this.onToken = this.onToken.bind(this);
@@ -34,7 +35,6 @@ class BookingSlot extends React.Component {
   }
 
   componentDidMount() {
-    console.log(process.env.Stripe_PK);
     console.log("lol");
   }
 
@@ -48,21 +48,20 @@ class BookingSlot extends React.Component {
       });
     });
     this.createNewBooking()
-    this.updateBookingSlot()
   }
 
-  createNewBooking(event) {
-    // prevent default action. in this case, action is the form submission event
-    event.preventDefault();
+  createNewBooking() {
     // create a string for an HTTP body message
     // TODO = get the array &object id things working
     const teamName = encodeURIComponent(this.state.booking.teamName);
     const notes = encodeURIComponent(this.state.booking.notes);
     const date = encodeURIComponent(this.props.bookingSlot.date);
+    const price = encodeURIComponent(this.props.bookingSlot.price);
     const organiserName = encodeURIComponent(this.state.booking.organiserName);
     const organiserEmail = encodeURIComponent(this.state.booking.organiserEmail);
     const roomId = encodeURIComponent(this.state.booking.roomId);
-    const formData = `?teamName=${teamName}&notes=${notes}&date=${date}&organiserName=${organiserName}&organiserEmail=${organiserEmail}`;
+    const bookingSlotId = encodeURIComponent(this.props.bookingSlot._id);
+    const formData = `?teamName=${teamName}&notes=${notes}&date=${date}&organiserName=${organiserName}&organiserEmail=${organiserEmail}&price=${price}`;
     console.log(`formData: ${formData}`)
 
     // create an AJAX request
@@ -71,6 +70,8 @@ class BookingSlot extends React.Component {
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.send(formData);
+
+    this.updateBookingSlot();
   }
 
   changeBooking(event) {
@@ -98,7 +99,7 @@ class BookingSlot extends React.Component {
 
   render() {
     return (
-      <Column style={style}>
+      <Column  size="isOneThird" style={style}>
         <Card >
           <CardHeader>
             <CardHeaderTitle>
@@ -131,8 +132,9 @@ class BookingSlot extends React.Component {
                     token={this.onToken}
                     name={this.props.bookingSlot._id}
                     amount={this.props.bookingSlot.price * 100}
+                    email={this.state.booking.organiserEmail}
                     currency="AUD"
-                    stripeKey="pk_test_sKxuJtLeLqifb1w8YG1s8g9U">
+                    stripeKey={process.env.REACT_APP_STRIPEKEY}>
                     <Button color="isSuccess" onClick={() => this.setState({ isOpen: false })}>Book Now</Button>
                   </StripeCheckout>
                 </Modal>

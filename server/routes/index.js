@@ -181,17 +181,20 @@ router.post('/api/bookings/new/', (req, res) => {
   const notes = req.query.notes;
   const hasPaid = req.query.hasPaid;
   const teamName = req.query.teamName;
+  const price = req.query.price;
   // const teamMembers = req.body.teamMembers;
   // const stats = req.body.stats;
 
   let booking = new Booking();
   booking.roomId = req.query.roomId
+  booking.bookingSlotId = req.query.bookingSlotId
   booking.organiserName = organiserName;
   booking.organiserEmail = organiserEmail;
   booking.date = date;
   booking.notes = notes;
   booking.hasPaid = hasPaid;
   booking.teamName = teamName;
+  booking.price = price;
   // booking.teamMembers = teamMembers;
   // booking.stats = stats;
 
