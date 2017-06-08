@@ -3,6 +3,7 @@ import { Card, CardHeader, CardHeaderTitle, CardHeaderIcon, CardContent, Content
 import StripeCheckout from 'react-stripe-checkout';
 import Auth from '../modules/Auth';
 import CreateBookingFormCustomer from './CreateBookingFormCustomer';
+import moment from 'moment';
 
 const style = { padding: '10px' };
 
@@ -101,55 +102,50 @@ class BookingSlot extends React.Component {
     return (
       <Column  size="isOneThird" style={style}>
         <Card >
-          <CardHeader>
-            <CardHeaderTitle>
-            </CardHeaderTitle>
-          </CardHeader>
           <CardContent>
 
-            <ul>
-              <li><b>ID:</b> {this.props.bookingSlot._id} </li>
-              <li><b>date:</b> {this.props.bookingSlot.date} </li>
-              <li><b>time:</b> {this.props.bookingSlot.time} </li>
-              <li><b>room:</b> {this.props.bookingSlot.room} </li>
-              <li><b>price:</b> {this.props.bookingSlot.price} </li>
-              <li><b>available:</b> {this.props.bookingSlot.available} </li>
-            </ul>
+            <p>
+              <strong>Room:</strong> {this.props.fakeRoom}
+              <br/>
+              <strong>Date:</strong> {moment(this.props.bookingSlot.date).format('h:mm:a, MMMM Do YYYY')}
+              <br/>
+              <strong>Price:</strong> ${this.props.bookingSlot.price}
+            </p>
             { this.props.bookingSlot.available ?
-              <div>
+              <div style={{ textAlign: 'center' }} >
                 <Button onClick={() => this.setState({ isOpen: true })}>Open</Button>
                 <Modal
                   type="card"
-                  headerContent="Header Content"
+                  headerContent="Enter your details below"
                   isActive={this.state.isOpen}
                   onCloseRequest={() => this.setState({ isOpen: false })}>
                   <Content>
                     <CreateBookingFormCustomer
                       booking={this.state.booking}
                       onChange={this.changeBooking}/>
-                  </Content>
-                  <StripeCheckout
-                    token={this.onToken}
-                    name={this.props.bookingSlot._id}
-                    amount={this.props.bookingSlot.price * 100}
-                    email={this.state.booking.organiserEmail}
-                    currency="AUD"
-                    stripeKey={process.env.REACT_APP_STRIPEKEY}>
-                    <Button color="isSuccess" onClick={() => this.setState({ isOpen: false })}>Book Now</Button>
-                  </StripeCheckout>
-                </Modal>
-              </div>
-              :
-              <Button color="isDanger">BOOKED!</Button>}
+                    </Content>
+                    <StripeCheckout
+                      token={this.onToken}
+                      name={this.props.bookingSlot._id}
+                      amount={this.props.bookingSlot.price * 100}
+                      email={this.state.booking.organiserEmail}
+                      currency="AUD"
+                      stripeKey={process.env.REACT_APP_STRIPEKEY}>
+                      <Button color="isInfo" onClick={() => this.setState({ isOpen: false })}>Book Now</Button>
+                    </StripeCheckout>
+                  </Modal>
+                </div>
+                :
+                <div style={{textAlign: 'center'}}><Button color="isDanger">BOOKED!</Button></div>}
 
-            </CardContent>
-          </Card>
-        </Column>
-      )
+              </CardContent>
+            </Card>
+          </Column>
+        )
+      }
     }
-  }
 
-  BookingSlot.propTypes = {
-  };
+    BookingSlot.propTypes = {
+    };
 
-  export default BookingSlot;
+    export default BookingSlot;

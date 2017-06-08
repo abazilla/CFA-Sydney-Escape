@@ -1,49 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Input, Textarea } from 're-bulma';
 // TODO - add errors
 
 const CreateBookingFormCustomer = ({
   onChange,
   booking,
 }) => (
-  <div className="container">
-      <h2 className="card-heading">Enter your details</h2>
+  <div>
 
-      <div className="field-line">
-        teamName
-        <input
-          name="teamName"
-          onChange={onChange}
-          value={booking.teamName}
-        />
-      </div>
-
-      <div className="field-line">
-        notes
-        <textarea
-          name="notes"
-          onChange={onChange}
-          value={booking.notes}
-        ></textarea>
-      </div>
-
-      <div className="field-line">
-        organiserName
-        <input
-          name="organiserName"
-          onChange={onChange}
-          value={booking.organiserName}
-        />
-      </div>
-      <div className="field-line">
-        organiserEmail
-        <input
-          name="organiserEmail"
-          onChange={onChange}
-          value={booking.organiserEmail}
-        />
-      </div>
+    <div className="field-line">
+      <Input
+        name="teamName"
+        placeholder="Team Name"
+        onChange={onChange}
+        value={booking.teamName}
+      />
+    </div>
+    <br/>
+    <div className="field-line">
+      <Textarea
+        name="notes"
+        placeholder="Notes"
+        onChange={onChange}
+        value={booking.notes}
+      />
+    </div>
+    <br/>
+    <div className="field-line">
+      <Input
+        name="organiserName"
+        placeholder="Organiser Name"
+        onChange={onChange}
+        value={booking.organiserName}
+      />
+    </div>
+    <br/>
+    <div className="field-line">
+      <Input
+        name="organiserEmail"
+        placeholder="Organiser Email"
+        onChange={onChange}
+        value={booking.organiserEmail}
+      />
+    </div>
 
 
   </div>

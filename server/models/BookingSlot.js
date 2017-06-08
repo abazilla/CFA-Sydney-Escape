@@ -8,7 +8,10 @@ const bookingSlotSchema = new Schema({
     date: Date,
     time: Date,
     room: ObjectId,
-    available: Boolean,
+    available: {
+      type: Boolean,
+      default: true,
+    },
     price: Number,
 })
 

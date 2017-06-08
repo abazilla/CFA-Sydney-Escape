@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ModifyButtons from '../components/ModifyButtons.jsx';
-import { Section, Container, Title, Card, CardHeader, CardHeaderTitle, CardHeaderIcon, CardContent, Content, CardFooter, CardFooterItem, Columns, Column } from 're-bulma';
+import { Section, Container, Title, Card, CardHeader, CardHeaderTitle, CardHeaderIcon, CardContent, Content, CardFooter, CardFooterItem, Columns, Column} from 're-bulma';
+import moment from 'moment';
+
 
 const style = { padding: '10px' };
 
@@ -12,10 +14,10 @@ const Dashboard = ({ secretData, rooms, bookings, bookingSlots, roomIdCallback }
     <Section>
       <Title>Rooms</Title>
       <Columns isMultiline>
-          {rooms.map((room, i) => (
-            <span key={i}>
-              <Column style={style}>
-              <Card >
+        {rooms.map((room, i) => (
+          <span key={i}>
+            <Column style={style}>
+              <Card>
                 <CardHeader>
                   <CardHeaderTitle>
                     {room.title}
@@ -24,23 +26,20 @@ const Dashboard = ({ secretData, rooms, bookings, bookingSlots, roomIdCallback }
                 <CardContent>
                   <Content>
                     <ul>
-                      <li><b>ID:</b> {room._id} </li>
-                      <li><b>description:</b> {room.description} </li>
-                      <li><b>Members:</b> {room.minMembers} to {room.maxMembers} </li>
-                      <li><b>isEnabled:</b> {room.isEnabled} </li>
-                      <li><b>pictures:</b> {room.pictures} </li>
+                      <li><strong>ID:</strong> {room._id} </li>
+                      <li><strong>description:</strong> {room.description} </li>
+                      <li><strong>Members:</strong> {room.minMembers} to {room.maxMembers} </li>
+                      <li><strong>isEnabled:</strong> {room.isEnabled} </li>
                       <br/>
-                      <small> {room.createdAt} </small>
                     </ul>
                   </Content>
                 </CardContent>
-                <CardFooter>
-                  <ModifyButtons id={room._id} type="rooms"/>
-                </CardFooter>
+                <ModifyButtons id={room._id} type="rooms"/>
+                <br/>
               </Card>
             </Column>
-            </span>
-          ))}
+          </span>
+        ))}
       </Columns>
     </Section>
     <Section>
@@ -59,23 +58,17 @@ const Dashboard = ({ secretData, rooms, bookings, bookingSlots, roomIdCallback }
                 <CardContent>
                   <Content>
                     <ul>
-                      <li><b>ID:</b> {booking._id} </li>
-                      <li><b>createdAt:</b> {booking.createdAt} </li>
-                      <li><b>RoomID:</b> {booking.roomId} </li>
-                      <li><b>bookingSlotId:</b> {booking.bookingSlotId} </li>
-                      <li><b>Date:</b> {booking.date} </li>
-                      <li><b>price:</b> {booking.price} </li>
-                      <li><b>Organiser:</b> {booking.organiserName} </li>
-                      <li><b>Organiser email:</b> {booking.organiserEmail} </li>
-                      <li><b>hasPaid:</b> {booking.hasPaid} </li>
-                      <li><b>Stats:</b> {booking.isEnabled} </li>
-                      <li><b>teamMembers:</b> {booking.pictures} </li>
+                      <li><strong>ID:</strong> {booking._id} </li>
+                      <li><strong>Created At:</strong> {moment(booking.createdAt).format('h:mm:a, MMMM Do YYYY')} </li>
+                      <li><strong>Date:</strong> {moment(booking.date).format('h:mm:a, MMMM Do YYYY')} </li>
+                      <li><strong>Price:</strong> ${booking.price} </li>
+                      <li><strong>Organiser:</strong> {booking.organiserName} </li>
+                      <li><strong>Organiser email:</strong> {booking.organiserEmail} </li>
                     </ul>
                   </Content>
                 </CardContent>
-                <CardFooter>
-                  <ModifyButtons id={booking._id} type="bookings"/>
-                </CardFooter>
+                <ModifyButtons id={booking._id} type="bookings"/>
+                <br/>
               </Card>
             </Column>
           </div>
@@ -90,24 +83,18 @@ const Dashboard = ({ secretData, rooms, bookings, bookingSlots, roomIdCallback }
           <div key={i}>
             <Column style={style}>
               <Card >
-                <CardHeader>
-                  <CardHeaderTitle>
-                  </CardHeaderTitle>
-                </CardHeader>
                 <CardContent>
                   <Content>
                     <ul>
-                      <li><b>ID:</b> {bookingslot._id} </li>
-                      <li><b>date:</b> {bookingslot.date} </li>
-                      <li><b>time:</b> {bookingslot.time} </li>
-                      <li><b>room:</b> {bookingslot.room} </li>
-                      <li><b>available:</b> {bookingslot.available} </li>
+                      <li><strong>ID:</strong> {bookingslot._id} </li>
+                      <li><strong>date:</strong> {moment(bookingslot.date).format('h:mm:a, MMMM Do YYYY')} </li>
+                      <li><strong>room:</strong> {bookingslot.room} </li>
+                      <li><strong>available:</strong> {bookingslot.available} </li>
                     </ul>
                   </Content>
                 </CardContent>
-                <CardFooter>
-                  <ModifyButtons id={bookingslot._id} type="bookingSlots"/>
-                </CardFooter>
+                <ModifyButtons id={bookingslot._id} type="bookingSlots"/>
+                <br/>
               </Card>
             </Column>
           </div>

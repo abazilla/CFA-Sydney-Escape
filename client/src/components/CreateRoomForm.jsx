@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Card, CardHeader, CardHeaderTitle, CardContent, Content } from 're-bulma';
+import { Card, CardHeader, CardHeaderTitle, CardContent, Content, Input, Button,Textarea } from 're-bulma';
 // TODO - add errors
 
 const CreateRoomForm = ({
@@ -25,67 +25,49 @@ const CreateRoomForm = ({
         {errors.summary && <p className="error-message">{errors.summary}</p>}
 
         <div className="field-line">
-          Title
-          <input
+          <Input
             name="title"
+            placeholder="Title"
             errorText={errors.title}
             onChange={onChange}
             value={room.title}
           />
         </div>
-
+        <br/>
         <div className="field-line">
-          isEnabled
-          <input
-            type="checkbox"
-            name="isEnabled"
-            errorText={errors.isEnabled}
-            onChange={onChange}
-            value={room.isEnabled}
-          />
-        </div>
-
-        <div className="field-line">
-          minMembers
-          <input
+          <Input
             name="minMembers"
+            placeholder="Min Players"
+
             errorText={errors.minMembers}
             onChange={onChange}
             value={room.minMembers}
           />
         </div>
-
+        <br/>
         <div className="field-line">
-          maxMembers
-          <input
+          <Input
             name="maxMembers"
+            placeholder="Max Players"
+
             errorText={errors.maxMembers}
             onChange={onChange}
             value={room.maxMembers}
           />
         </div>
-
+        <br/>
         <div className="field-line">
-          description
-          <input
+
+          <Textarea
             name="description"
+            placeholder="Description"
             errorText={errors.description}
             onChange={onChange}
             value={room.description}
           />
         </div>
-
-        <div className="field-line">
-          pictures
-          <input
-            name="pictures"
-            errorText={errors.pictures}
-            onChange={onChange}
-            value={room.pictures}
-          />
-        </div>
-
-        <button type="submit" label="">Make Room</button>
+        <br/>
+        <Button color="isInfo" type="submit" label="">Make Room</Button>
       </Content>
     </CardContent>
   </form>

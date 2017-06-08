@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Auth from '../modules/Auth';
 import { Link } from 'react-router-dom';
-import { CardFooter, CardFooterItem } from 're-bulma';
+import { Group, Button, Column, Columns} from 're-bulma';
 
 class ModifyButtons extends Component {
   constructor(props, context) {
@@ -26,19 +26,23 @@ class ModifyButtons extends Component {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         // refresh page after deleting type
-        window.location.reload();
       }
     });
     xhr.send();
+    window.location.reload();
   }
 
 
   render() {
     return (
-      <span>
-        <CardFooterItem> Edit </CardFooterItem>
-        <CardFooterItem> Delete </CardFooterItem>
-      </span>
+      <Columns>
+        <Column size="is12" offset="isOffset5">
+          <Group>
+            <Button color="isInfo"> Edit </Button>
+            <Button color="isDanger" onClick={this.deleteRoom}> Delete </Button>
+          </Group>
+        </Column>
+      </Columns>
     );
   }
 }

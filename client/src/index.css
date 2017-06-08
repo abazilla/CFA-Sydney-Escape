@@ -1,5 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway|Roboto');
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 34px;
+
+}
+
+a, a:-webkit-any-link {
+  text-decoration: none;
+}
+
+.subtitle {
+  font-size: 28px;
+  font-family: 'Roboto', sans-serif;
+}
+
+p, li {
+  font-size: 20px;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: none;
+  font-family: 'Raleway', sans-serif;
+}
+
+.__re-bulma_hero.__re-bulma_is-dark {
+  background-image: url(http://i.imgur.com/zNehXBb.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
+
+ .fa-twitter:before, .fa-instagram:before, .fa-envelope:before, .fa-facebook-official:before, .__re-bulma_nav-item a, a.__re-bulma_nav-item {
+  color: white;
+  text-decoration: none;
+}
+
+.fa-star:before, .fa-star-half-o:before, .fa-star-o:before {
+  color: #ED931E;
+}
+
+.__re-bulma_footer, .red {
+  background-color: #EF6B5F;
+  color: white !important;
+}
+
+.etp {
+  background-image: url(http://i.imgur.com/GRofdYF.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
+
+.spe {
+  background-image: url(http://i.imgur.com/btw3DhO.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
 }

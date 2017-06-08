@@ -14,7 +14,7 @@ import LogoutFunction from './containers/LogoutFunction.jsx';
 
 import Auth from './modules/Auth';
 
-import { Nav, NavGroup, NavItem, Hero, Footer, Container, Content } from 're-bulma';
+import { Nav, NavGroup, NavItem, Hero, Footer, Container, Content, Column, Columns, Icon } from 're-bulma';
 
 require('dotenv').config()
 
@@ -23,15 +23,15 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Hero color="isBlack">
+          <Hero color="isDanger">
             <Nav>
               <NavGroup align="left">
                 <NavItem>
+                  <Link to="/">Sydney Escape</Link>
                 </NavItem>
               </NavGroup>
               <NavGroup align="center">
                 <NavItem>
-                  <Link to="/">Sydney Escape</Link>
                 </NavItem>
               </NavGroup>
               <NavGroup align="right">
@@ -65,24 +65,58 @@ class App extends Component {
             {/* <Route path="/bookings" component={ () => (<BookingsPage bookingSlots={[ "1"]} />)}/> */}
           </Switch>
           {/* {children} */}
-          <Footer>
+          <Footer className="red">
             <Container>
               <Content>
-                <p style={{ textAlign: 'center'}}>
-                  created by <a target="_blank" href="https://github.com/abazilla">abazilla</a>.
-                </p>
-                <p style={{ textAlign: 'center'}}>
-                  <a className="icon" href="https://github.com/bokuweb/re-bulma">
-                  <i className="fa fa-github"></i>
-                </a>
-              </p>
-            </Content>
-          </Container>
-        </Footer>
-      </div>
-    </Router>
-  );
-}
-}
+                <Columns isMultiline>
+                  <Column size="is4" offset="isOffset1">
+                    <span className="red">Links<hr/>
+                    Home<br/>
+                    Book NOW!<br/>
+                    Location<br/>
+                    Contact Us<br/>
+                    </span>
+                  </Column>
+                  <Column size="is4" offset="isOffset2">
+                    <span className="red">The Fine Print<hr/>
+                    Refunds<br/>
+                    Terms & Conditions<br/>
+                    Privacy Policy<br/>
+                    Legal Advice<br/>
+                  </span>
+                  </Column>
+                  <Column size="is6"><br/></Column>
+                  <Column size="is6"><br/></Column>
+                  <Column size="is6"><br/></Column>
+                  <Column size="is6"><br/></Column>
+                  <Column size="is3">
+                    <p style={{ textAlign: 'center'}}>
+                      <a href="https://facebook.com/sydney-escape" target="_blank"><Icon size="isLarge" className="fa fa-facebook-official"></Icon></a></p></Column>
+                      <Column size="is3"><p style={{ textAlign: 'center'}}><a href="mailto:sydney.escape@gmail.com" target="_blank"><Icon size="isLarge" className="fa fa-envelope "></Icon></a></p></Column>
+                      <Column size="is3"><p style={{ textAlign: 'center'}}><a href="https://www.instagram.com/sydney_escape/" target="_blank"><Icon size="isLarge" className="fa fa-instagram "></Icon></a></p></Column>
+                      <Column size="is3"><p style={{ textAlign: 'center'}}><a href="https://twitter.com/sydney_escape" target="_blank"><Icon size="isLarge" className="fa fa-twitter "></Icon></a></p></Column>
+                      <Column size="is12">
+                        <p style={{ textAlign: 'center'}}>
+                          <span className="red">
+                          created by <a target="_blank" href="https://github.com/abazilla">abazilla</a>.
+                        </span>
+                        </p>
+                      </Column>
+                      <Column size="is12">
+                        <p style={{ textAlign: 'center'}}>
+                          <span className="red">
+                          Copyright &copy; Sydney Escape 2017
+                        </span>
+                        </p>
+                      </Column>
+                    </Columns>
+                  </Content>
+                </Container>
+              </Footer>
+            </div>
+          </Router>
+        );
+      }
+    }
 
-export default App;
+    export default App;

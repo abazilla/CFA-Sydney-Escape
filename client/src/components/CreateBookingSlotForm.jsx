@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Card, CardHeader, CardHeaderTitle, CardContent, Content } from 're-bulma';
+import { Card, CardHeader, CardHeaderTitle, CardContent, Content, Input, Button } from 're-bulma';
 
 // TODO - add errors
 
@@ -22,62 +22,43 @@ const CreateBookingSlotForm = ({
     <CardContent>
       <Content>
 
-      {successMessage && <p className="success-message">{successMessage}</p>}
-      {errors.summary && <p className="error-message">{errors.summary}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
+        {errors.summary && <p className="error-message">{errors.summary}</p>}
 
-      <div className="field-line">
-        date
-        <input
-          name="date"
-          type="date"
-          errorText={errors.date}
-          onChange={onChange}
-          value={bookingSlot.date}
-        />
-      </div>
-
-      <div className="field-line">
-        time
-        <input
-          name="time"
-          type="time"
-          errorText={errors.time}
-          onChange={onChange}
-          value={bookingSlot.time}
-        />
-      </div>
-      <div className="field-line">
-        room
-        <input
-          type="text"
-          name="room"
-          errorText={errors.room}
-          onChange={onChange}
-          value={bookingSlot.room}
-        />
-      </div>
-      <div className="field-line">
-        price
-        <input
-          type="text"
-          name="price"
-          errorText={errors.price}
-          onChange={onChange}
-          value={bookingSlot.price}
-        />
-      </div>
-
-      <div className="field-line">
-        available
-        <checkbox
-          name="available"
-          errorText={errors.available}
-          onChange={onChange}
-          value={bookingSlot.available}
-        />
-      </div>
-
-        <button type="submit" label="">Make Booking Slot</button>
+        <div className="field-line">
+          <Input
+            name="date"
+            type="date"
+            placeholder="Date"
+            errorText={errors.date}
+            onChange={onChange}
+            value={bookingSlot.date}
+          />
+        </div>
+        <br/>
+        <div className="field-line">
+          <Input
+            type="text"
+            name="room"
+            placeholder="Room"
+            errorText={errors.room}
+            onChange={onChange}
+            value={bookingSlot.room}
+          />
+        </div>
+        <br/>
+        <div className="field-line">
+          <Input
+            type="number"
+            name="price"
+            placeholder="Price"
+            errorText={errors.price}
+            onChange={onChange}
+            value={bookingSlot.price}
+          />
+        </div>
+        <br/>
+        <Button color="isInfo" type="submit" label="">Make Booking Slot</Button>
       </Content>
     </CardContent>
   </form>

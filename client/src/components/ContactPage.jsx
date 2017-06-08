@@ -13,21 +13,19 @@ const ContactPage = () => (
           <Section>
             <Title>Find us here!</Title>
           </Section>
-        <GMap/>
-        <Title>or contact us!</Title>
+          <GMap/>
+          <Title>or contact us!</Title>
         </Column>
         <Column size="isHalf" style={style}>
           <Notification color="isSuccess">
             <Title>Phone</Title>
             <Subtitle>Give us a ring</Subtitle>
             <br/>
-            <Column size="">
-              <Icon
-                icon="fa fa-phone"
-                size="isLarge"
-              />
+            <Column size="" style={{ textAlign: 'center'}}>
+              <Column size="is12" style={{ textAlign: 'center'}}><Icon icon="fa fa-phone" size="isLarge"/></Column>
               <br/>
-              Call us on +61 1234 2345
+              <p style={{ marginBottom: '28px'}}>Call us on +61 1234 2345</p>
+              <br/>
             </Column>
           </Notification>
         </Column>
