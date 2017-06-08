@@ -1,6 +1,8 @@
 ![Imgur](http://i.imgur.com/HyZptil.jpg)
 # CFA-Sydney-Escape
-This is a website built for the 3rd Major Project of the Coder Factory Bootcamp. I have met some clients who are interested in a solution for their Escape Room business opening up in Sydney. They would like to have a website to provide information to potential customers, as well as a well-design booking and payment system, as there is to be no Point-of-contact sales on the premises. There will be 1 room released initially with a second to follow, so the website will accomodate for two rooms. 
+This is a website built for the 3rd Major Project of the Coder Factory Bootcamp. I have met some clients who are interested in a solution for their Escape Room business opening up in Sydney. They would like to have a website to provide information to potential customers, as well as a well-design booking and payment system, as there is to be no Point-of-contact sales on the premises. There will be 1 room released initially with a second to follow, so the website will accomodate for two rooms, and some features that they would like includes statistics which display taken directly from the database, and the contact mailer working.
+
+The solution is a React front-end and a node/express back-end with various API endpoints that will support the "ledger" of all runs via the database, which the front-end can make calls to. It will also support an intgrated payment and booking system as requested, which will heavily rely upon the back-end to function (at which point lots of data validation with be implemented to prevent any errors). The static website will also act as a hub for potential customers to learn about escape rooms and find more information about the client's business on top of bookings and payment. MongoDB (via mLab) will be used for the database, Stripe (and PayPal in the future) for payments, Mailgun for the mailing, and heroku/s3 for website hosting for now. The website will also be mobile friendly as requested
 ### Usage
 Unfortunately there currently is no production version as there are some issues upon uploading to heroku/s3.
  
@@ -45,6 +47,7 @@ The website building process was a very lengthy process, and involved a lot of l
  - Getting the connections between the front end and back end working
  - Styling the website with re-bulma and editing images
 ##### Challenges
+ - Asynchronous issues with React - upon providing your details and payment for a booking, sometimes the website will create a booking into the database, but will not update the availablity of the booking slot (or vice versa). This is likely due to the asynchronous nature of React, meaning that the website refreshes before finishing an action.
  - Severe overestimation of what I could complete in the two weeks. The following list are the things I had agreed on to complete with my client, however was not able to finish in time
     -  Statistics
     -  Mobile Friendliness
